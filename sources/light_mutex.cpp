@@ -1,4 +1,4 @@
-#include "light_mutex.hpp"
+#include "../includes/light_mutex.hpp"
 
 namespace LP {
 	void LightMutex::lock() {

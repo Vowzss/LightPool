@@ -144,7 +144,7 @@
     <ClInclude Include="includes\light_thread.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="includes\light_mutex.cpp" />
+    <ClCompile Include="sources\light_mutex.cpp" />
     <ClCompile Include="sources\light_pool.cpp" />
     <ClCompile Include="sources\light_pool_test.cpp" />
     <ClCompile Include="sources\light_thread.cpp" />

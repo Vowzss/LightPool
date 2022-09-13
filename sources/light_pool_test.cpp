@@ -38,10 +38,5 @@ int main() {
 	// stopping pools, tells threads to stop looking for tasks
 	l_pool.stop();
 
-	// deletes threads when task is finished
-	for (LP::LightThread* thr : l_pool.getPool()) {
-		thr->getThread().join();
-	}
-
 	return 1;
 }
