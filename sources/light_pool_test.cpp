@@ -29,6 +29,9 @@ int main() {
 		} else {
 			l_pool.registerTask(LP::Task{ []() { sayHello(); } });
 		}
+
+		// sync execution (no data races) ex: std::cout in our case
+		std::this_thread::sleep_for(std::chrono::milliseconds(1));
 	}
 
 	// waits for all the tasks to be executed by threads

@@ -15,13 +15,9 @@ namespace LP {
 
 		std::string getName();
 		std::thread& getThread();
-		bool getWorking();
-		void setWorking(const bool& pIsWorking);
 
 	private:
 		std::string name;
 		std::thread thread;
-
-		bool isWorking = false;
 	};
 }

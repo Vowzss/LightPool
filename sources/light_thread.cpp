@@ -4,14 +4,13 @@
 namespace LP {
 	LightThread::LightThread(LightPool& pPool, const std::string& pName) {
 		name = pName;
-
+		
 		thread = std::thread([&]() {
 			while (!pPool.shouldStop()) {
 				pPool.getQueryLock().lock();
 
 				while (pPool.getTasks().empty()) {
-					if (pPool.shouldStop())
-					{
+					if (pPool.shouldStop()) {
 						pPool.getQueryLock().unlock();
 						return;
 					}
@@ -33,13 +32,5 @@ namespace LP {
 
 	std::thread& LightThread::getThread() {
 		return thread;
-	}
-
-	bool LightThread::getWorking() {
-		return isWorking;
-	}
-
-	void LightThread::setWorking(const bool& pIsWorking) {
-		isWorking = pIsWorking;
 	}
 }
