@@ -43,31 +43,27 @@ namespace LP {
 	}
 
 	void LightPool::registerTask(Task task) {
-		taskMtx.lock();
+		taskLock.lock();
 		tasks.push(task);
-		taskMtx.unlock();
+		taskLock.unlock();
 
 		taskCondition.notify_one();
 	}
 
 	Task LightPool::queryTask(LightThread* pThread, std::string pName) {
-		queryMtx.lock();
-
-		std::cout << pThread->getName() << " was assigned a task!" << std::endl;
-
-		pThread->setWorking(false);
-
-		while (tasks.empty()) {
-			if (!pThread->getWorking()) {
-				pThread->setWorking(false);
-			}
-		}
-
-		pThread->setWorking(true);
-
 		Task task = tasks.front();
 		tasks.pop();
-		queryMtx.unlock();
 		return task;
+	}
+
+	LightMutex& LightPool::getQueryLock() {
+		return queryLock;
+	}
+	LightMutex& LightPool::getTaskLock() {
+		return taskLock;
+	}
+
+	std::queue<Task> LightPool::getTasks() {
+		return tasks;
 	}
 }

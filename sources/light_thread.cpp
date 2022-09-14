@@ -7,7 +7,19 @@ namespace LP {
 
 		thread = std::thread([&]() {
 			while (!pPool.shouldStop()) {
-				pPool.queryTask(this, name)();
+				pPool.getQueryLock().lock();
+
+				while (pPool.getTasks().empty()) {
+					if (pPool.shouldStop())
+					{
+						pPool.getQueryLock().unlock();
+						return;
+					}
+				}
+
+				Task rt = pPool.queryTask(this, name);
+				pPool.getQueryLock().unlock();
+				rt.task();
 			}
 		});
 	}

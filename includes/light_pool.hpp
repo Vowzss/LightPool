@@ -8,7 +8,11 @@
 #include "light_thread.hpp"
 
 namespace LP {
-	typedef std::function<void()> Task;
+
+	struct Task
+	{
+		std::function<void()> task;
+	};
 
 	class LightPool
 	{
@@ -28,9 +32,14 @@ namespace LP {
 
 		Task queryTask(LightThread* pThread, std::string pName);
 
+		LightMutex& getQueryLock();
+		LightMutex& getTaskLock();
+
+		std::queue<Task> getTasks();
+
 	private:
-		LightMutex queryMtx;
-		LightMutex taskMtx;
+		LightMutex queryLock;
+		LightMutex taskLock;
 
 		std::vector<LightThread*> pool;
 		std::queue<Task> tasks;
