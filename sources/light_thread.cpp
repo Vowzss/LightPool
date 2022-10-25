@@ -16,14 +16,22 @@ namespace LP {
 					}
 				}
 
-				Task rt = pPool.queryTask(this, name);
+				Task tk = pPool.queryTask(this, name);
 				pPool.getQueryLock().unlock();
-				rt.task();
+				
+				try {
+					tk.task();
+				}
+				catch (const std::exception&) {
+					continue;
+				}
+
 			}
 		});
 	}
 
 	LightThread::~LightThread() {
+		thread.join();
 	}
 
 	std::string LightThread::getName() {

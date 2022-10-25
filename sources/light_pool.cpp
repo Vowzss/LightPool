@@ -8,11 +8,7 @@ namespace LP {
 
 	LightPool::~LightPool() {
 		// wait for last task to finish before deleting threads
-		for (LP::LightThread* thr : pool) {
-			thr->getThread().join();
-		}
-		
-		for (LightThread* thr : pool) {
+		for (auto thr : pool) {
 			delete thr;
 		}
 	}
