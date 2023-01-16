@@ -139,15 +139,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="includes\light_mutex.hpp" />
-    <ClInclude Include="includes\light_pool.hpp" />
-    <ClInclude Include="includes\light_thread.hpp" />
+    <ClInclude Include="Includes\light_mutex.hpp" />
+    <ClInclude Include="Includes\light_pool.hpp" />
+    <ClInclude Include="Includes\light_thread.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="sources\light_mutex.cpp" />
-    <ClCompile Include="sources\light_pool.cpp" />
-    <ClCompile Include="sources\light_pool_test.cpp" />
-    <ClCompile Include="sources\light_thread.cpp" />
+    <ClCompile Include="Sources\light_mutex.cpp" />
+    <ClCompile Include="Sources\light_pool.cpp" />
+    <ClCompile Include="Sources\light_pool_test.cpp" />
+    <ClCompile Include="Sources\light_thread.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
