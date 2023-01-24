@@ -11,7 +11,7 @@ Open **LightPool.sln** solution using Visual Studio (recommended version 2019)
 # Usage
 First of all you need to instanciate a pool the following way.<br/>
 ```cpp
-#include "../includes/light_pool.hpp"
+#include "../Includes/light_pool.hpp"
 using namespace LP;
 
 LightPool pool;
@@ -90,7 +90,7 @@ void LightMutex::unlock() {
 # Exemples
 You can head to the following folder to have a better view of the whole library in action.<br/>
 &nbsp;&nbsp; -> .cpp files located in sources/<br/>
-&nbsp;&nbsp; -> .hpp files located in includes/<br/>
+&nbsp;&nbsp; -> .hpp files located in Includes/<br/>
 
 Exemple file is sources/ named **"light_pool_test.cpp"** (no header file for this one)
 
