@@ -157,7 +157,7 @@
     <ClInclude Include="Includes\LightThread.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Exemple.cpp">
+    <ClCompile Include="Samples\MainSample.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <Optimization>Disabled</Optimization>

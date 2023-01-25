@@ -3,16 +3,16 @@
 # LightPool
 </div>
 
-**LightPool is lightweight thread and pooling system originally made for loading and parsing data.**<br/>
+**LightPool is a lightweight thread and pooling system originally made for loading and parsing data.**<br/>
 
 # Run
-Open **LightPool.sln** solution using Visual Studio (recommended version 2019)
+Open **LightPool.sln** solution using Visual Studio (recommended version 2019) or Rider
 
 # Usage
 First of all you need to instanciate a pool the following way.<br/>
 ```cpp
-#include "../Includes/light_pool.hpp"
-using namespace LP;
+#include "Includes/light_pool.hpp"
+using namespace Light;
 
 LightPool pool;
 ```
@@ -92,7 +92,7 @@ You can head to the following folder to have a better view of the whole library 
 &nbsp;&nbsp; -> .cpp files located in sources/<br/>
 &nbsp;&nbsp; -> .hpp files located in Includes/<br/>
 
-Exemple file is sources/ named **"light_pool_test.cpp"** (no header file for this one)
+Exemple file is located in samples/ named **"MainSample.cpp"** (no header file for this one)
 
 # Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.<br/>
