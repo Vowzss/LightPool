@@ -11,28 +11,29 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Includes\light_mutex.hpp">
+    <ClInclude Include="Includes\LightMutex.hpp">
       <Filter>Includes</Filter>
     </ClInclude>
-    <ClInclude Include="Includes\light_pool.hpp">
+    <ClInclude Include="Includes\LightPool.hpp">
       <Filter>Includes</Filter>
     </ClInclude>
-    <ClInclude Include="Includes\light_thread.hpp">
+    <ClInclude Include="Includes\LightThread.hpp">
+      <Filter>Includes</Filter>
+    </ClInclude>
+    <ClInclude Include="Includes\LightTask.hpp">
       <Filter>Includes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sources\light_mutex.cpp">
+    <ClCompile Include="Sources\LightMutex.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\light_pool.cpp">
+    <ClCompile Include="Sources\LightPool.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\light_pool_test.cpp">
+    <ClCompile Include="Sources\LightThread.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\light_thread.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
+    <ClCompile Include="Exemple\Exemple.cpp" />
   </ItemGroup>
 </Project>
