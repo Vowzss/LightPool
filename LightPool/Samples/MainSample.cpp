@@ -4,8 +4,8 @@
 #include "Includes/LightPool.hpp"
 
 // Exemples of allocated values, it doesn't need to rely on it. (Check your system specs for safetiness)
-#define EX_MAX_THREADS 36
-#define EX_MAX_TASKS 36
+constexpr int EX_MAX_THREADS = 36;
+constexpr int EX_MAX_TASKS = 36;
 
 void sayHello() {
 	std::cout << "Hello!" << std::endl;
@@ -27,9 +27,9 @@ int main() {
 	// registering EX_MAX_TASKS tasks in pool -> if i multiple of 2 then register "sayHello" task if not register "sayGoodbye" task
 	for (int i = 0; i < EX_MAX_TASKS; i++) {
 		if (i % 2) {
-			l_pool.registerTask(Light::Task { []() { sayGoodbye(); }});
+			l_pool.registerTask(Light::Task { [] { sayGoodbye(); }});
 		} else {
-			l_pool.registerTask(Light::Task{ []() { sayHello(); } });
+			l_pool.registerTask(Light::Task { [] { sayHello(); } });
 		}
 
 		// sync execution (no data races) ex: std::cout in our case

@@ -11,7 +11,7 @@ Open **LightPool.sln** solution using Visual Studio (recommended version 2019) o
 # Usage
 First of all you need to instanciate a pool the following way.<br/>
 ```cpp
-#include "Includes/light_pool.hpp"
+#include "Includes/LightPool.hpp"
 using namespace Light;
 
 LightPool pool;
