@@ -1,5 +1,8 @@
 #pragma once
 
+#include <condition_variable>
+#include <iostream>
+#include <ostream>
 #include <vector>
 #include <queue>
 
@@ -11,35 +14,54 @@ namespace Light
 {
     class LightPool
     {
-    public:
-        LightPool();
-        ~LightPool();
-
-        void registerThread(LightThread* pThread);
-        void unregisterThread(LightThread* pThread);
-
-        std::vector<LightThread*> getPool();
-
-        void stop();
-        bool shouldStop();
-
-        void registerTask(Task task);
-
-        Task queryTask(LightThread* pThread, std::string pName);
-
-        LightMutex& getQueryLock();
-        LightMutex& getTaskLock();
-
-        std::queue<Task> getTasks();
-
     private:
         LightMutex queryLock;
         LightMutex taskLock;
 
         std::vector<LightThread*> pool;
-        std::queue<Task> tasks;
+        std::queue<Task*> tasks;
 
         std::atomic_bool shutdown{false};
         std::condition_variable taskCondition;
+        
+    public:
+        LightPool() = default;
+        ~LightPool();
+
+    public:
+        void registerThread(LightThread* pThread);
+        void unregisterThread(LightThread* pThread);
+        void unregisterThreads();
+        
+        void registerTask(Task* pTask);
+        Task* queryTask();
+
+    public:
+        std::vector<LightThread*> getPool() const
+        {
+            return pool;
+        }
+        
+        LightMutex& getQueryLock() {
+            return queryLock;
+        }
+        
+        LightMutex& getTaskLock() {
+            return taskLock;
+        }
+
+        std::queue<Task*> getTasks() const {
+            return tasks;
+        }
+        
+        void stopPool() {
+            std::cout << "Shutting down thread pool!" << std::endl;
+            shutdown = true;
+            unregisterThreads();
+        }
+
+        bool shouldStop() const {
+            return shutdown;
+        }
     };
 }

@@ -1,7 +1,6 @@
 #pragma once
 
 #include <string>
-#include <condition_variable>
 #include <thread>
 
 namespace Light
@@ -10,15 +9,22 @@ namespace Light
 
     class LightThread
     {
-    public:
-        LightThread(LightPool& pPool, const std::string& pNam);
-        ~LightThread();
-
-        std::string getName();
-        std::thread& getThread();
-
     private:
+        int id;
         std::string name;
         std::thread thread;
+        
+    public:
+        LightThread(LightPool& pPool, int pId);
+        ~LightThread();
+
+    public:
+        std::string getName() {
+            return name;
+        }
+        
+        std::thread& getThread() {
+            return thread;
+        }
     };
 }

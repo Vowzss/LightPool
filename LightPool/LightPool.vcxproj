@@ -232,6 +232,7 @@
     </ClCompile>
     <ClCompile Include="Sources\LightMutex.cpp" />
     <ClCompile Include="Sources\LightPool.cpp" />
+    <ClCompile Include="Sources\LightTask.cpp" />
     <ClCompile Include="Sources\LightThread.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -6,11 +6,16 @@ namespace Light
 {
     class LightMutex
     {
+    private:
+        std::atomic<bool> locked{false};
+        
     public:
         void lock();
         void unlock();
 
-    private:
-        std::atomic<bool> locked{false};
+    public:
+        bool isLocked() const {
+            return locked;
+        }
     };
 }

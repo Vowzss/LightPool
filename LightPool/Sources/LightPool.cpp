@@ -1,82 +1,55 @@
 #include "Includes/LightPool.hpp"
 
-#include <iostream>
-
-namespace Light
+using namespace Light;
+LightPool::~LightPool()
 {
-    LightPool::LightPool()
-    {
-    }
-
-    LightPool::~LightPool()
-    {
-        // wait for last task to finish before deleting threads
-        for (auto thr : pool)
-        {
-            delete thr;
-        }
-    }
-
-    std::vector<LightThread*> LightPool::getPool()
-    {
-        return pool;
-    }
-
-    void LightPool::registerThread(LightThread* pThread)
-    {
-        pool.push_back(pThread);
-    }
-
-    void LightPool::unregisterThread(LightThread* pThread)
-    {
-        for (int i = 0; i < pool.size(); i++)
-        {
-            if (pThread->getName() == pool.at(i)->getName())
-            {
-                pool.erase(pool.begin() + i);
-                break;
-            }
-        }
-    }
-
-    void LightPool::stop()
-    {
-        shutdown = true;
-    }
-
-    bool LightPool::shouldStop()
-    {
-        return shutdown;
-    }
-
-    void LightPool::registerTask(Task task)
-    {
-        taskLock.lock();
-        tasks.push(task);
-        taskLock.unlock();
-
-        taskCondition.notify_one();
-    }
-
-    Task LightPool::queryTask(LightThread* pThread, std::string pName)
-    {
-        const Task task = tasks.front();
-        tasks.pop();
-        return task;
-    }
-
-    LightMutex& LightPool::getQueryLock()
-    {
-        return queryLock;
-    }
-
-    LightMutex& LightPool::getTaskLock()
-    {
-        return taskLock;
-    }
-
-    std::queue<Task> LightPool::getTasks()
-    {
-        return tasks;
+    // wait for last task to finish before deleting threads
+    for (const auto thread : pool) {
+        delete thread;
     }
 }
+
+void LightPool::registerThread(LightThread* pThread)
+{
+    pool.push_back(pThread);
+}
+
+void LightPool::unregisterThread(LightThread* pThread)
+{
+    for (int i = 0; i < pool.size(); i++)
+    {
+        if (pThread->getName() == pool.at(i)->getName())
+        {
+            pool.erase(pool.begin() + i);
+            delete pThread;
+            break;
+        }
+    }
+}
+
+void LightPool::unregisterThreads()
+{
+    for (int i = 0; i < pool.size(); i++)
+    {
+        delete pool[i];
+        pool.erase(pool.begin() + i);
+    }
+}
+
+void LightPool::registerTask(Task* pTask)
+{
+    taskLock.lock();
+    tasks.push(pTask);
+    taskLock.unlock();
+
+    taskCondition.notify_one();
+}
+
+Task* LightPool::queryTask()
+{
+    if(tasks.empty()) return nullptr;
+    Task* task = tasks.front();
+    tasks.pop();
+    return task;
+}
+
